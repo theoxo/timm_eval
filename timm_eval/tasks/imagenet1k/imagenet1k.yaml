@@ -1,0 +1,15 @@
+tag:
+  - image-classification
+task: imagenet1k
+dataset_path: !function utils.error_unimplemented_path   # TODO replace me with the path to your imagenet2012 dir!
+dataset_type: image-folder
+dataset_name: imagenet-1k
+test_split: val
+process_results: !function utils.process_results
+metric_list:
+  - metric: top1
+    aggregation: mean
+    higher_is_better: true
+  - metric: top5
+    aggregation: mean
+    higher_is_better: true

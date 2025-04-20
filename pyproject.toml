@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=40.8.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "timm_eval"
+version = "2025.04.18"
+authors = [
+    {name="Theo X. Olausson", email="theoxo@mit.edu"},
+]
+description = "A framework for evaluating computer vision models"
+readme = "README.md"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+license = { "text" = "MIT" }
+dependencies = [
+    "torch",
+    "tqdm",
+    "timm",
+    "torchvision",
+    "wandb",
+    "evaluate",
+    "dill",
+    "huggingface-hub",
+    "accelerate",
+    "pytablewriter",
+    "jinja2",
+]
+
+[tool.setuptools.packages.find]
+include = ["timm_eval*"]
+
+# required to include yaml files in pip installation
+[tool.setuptools.package-data]
+timm_eval = ["**/*.yaml", "tasks/**/*"]
+
+[project.scripts]
+timm-eval = "timm_eval.__main__:cli_evaluate"
+timm_eval = "timm_eval.__main__:cli_evaluate"
+
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+known-first-party = ["timm_eval"]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"__init__.py" = ["F401","F402","F403"]
+"utils.py" = ["F401"]
